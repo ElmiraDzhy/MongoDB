@@ -1,0 +1,73 @@
+/*
+USERS
+    firstName * - string
+    lastName * - string
+    email * - string
+    password * - string
+    address - object {
+            +street
+            +city
+            +house
+        }
+    birthday - date
+    gender - string
+
+
+
+*/
+
+db.createCollection('users', {
+    validator: {
+        $jsonSchema: {
+            required: ['firstName', 'lastName', 'email', 'password'],
+            properties: {
+                firstName: {
+                    bsonType: 'string',
+                    description: 'must be a string and is required'
+                },
+                lastName: {
+                    bsonType: 'string',
+                    description: 'must be a string and is required'
+                },
+                email: {
+                    bsonType: 'string',
+                    description: 'must be a string and is required'
+                },
+                password: {
+                    bsonType: 'string',
+                    description: 'must be a string and is required'
+                },
+                birthday: {
+                    bsonType: 'date',
+                    description: 'must be a date'
+                },
+                gender: {
+                    bsonType: 'string',
+                    description: 'must be a string'
+                },
+                address: {
+                    bsonType: 'object',
+                    required: ['city', 'street'],
+                    description: 'must be an object',
+                    properties: {
+                        city: {
+                            bsonType: 'string',
+                            description: 'must be an string and is required',
+                        },
+                        street: {
+                            bsonType: 'string',
+                            description: 'must be an string and is required',
+
+                        },
+                        house: {
+                            bsonType: 'int',
+                            description: 'must be an int',
+
+                        }
+                    }
+
+                }
+            }
+        }
+    }
+});
