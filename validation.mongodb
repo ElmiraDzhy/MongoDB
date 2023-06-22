@@ -71,3 +71,108 @@ db.createCollection('users', {
         }
     }
 });
+
+db.users.insertOne({
+    firstName: 'test',
+    lastName: 'test',
+    email: 'test@gmail.com',
+    password: '1234',
+    gender: 'male',
+});
+
+
+
+db.createCollection('products', {
+    validator: {
+        $jsonSchema: {
+            required: ['name', 'category', 'price'],
+            properties: {
+                name: {
+                    bsonType: 'string',
+                    description: 'must be a string and is required'
+                },
+                category: {
+                    bsonType: 'string',
+                    description: 'must be a string and is required'
+                },
+                price: {
+                    bsonType: 'double',
+                    description: 'must be a double and is required'
+                },
+                discountPrice: {
+                    bsonType: 'double',
+                    description: 'must be a double'
+                },
+                description: {
+                    bsonType: 'string',
+                    description: 'must be a string'
+                },
+                manufacturer: {
+                    bsonType: 'object',
+                    description: 'must be an object',
+                    properties: {
+                        name: {
+                            bsonType: 'string',
+                            description: 'must be a string'
+                        },
+                        city: {
+                            bsonType: 'string',
+                            description: 'must be a string'
+                        },
+                    }
+                },
+                color: {
+                    bsonType: 'array',
+                    description: 'must be an array'
+
+                }
+            }
+        }
+    }
+});
+
+db.createCollection('books', {
+    validator: {
+        $jsonSchema: {
+            required: ['name', 'author'],
+            properties: {
+                name: {
+                    bsonType: 'string',
+                    description: 'must be a string and is required'
+                },
+                author: {
+                    bsonType: 'object',
+                    required: ['name', 'lastName'],
+                    description: 'must be an object',
+                    properties: {
+                        name: {
+                            bsonType: 'string',
+                            description: 'must be a string and is required'
+                        },
+                        lastName: {
+                            bsonType: 'string',
+                            description: 'must be a string and is required'
+                        },
+                        birthday: {
+                            bsonType: 'date',
+                            description: 'must be an date',
+                        }
+                    }
+                },
+                edition: {
+                    bsonType: 'int',
+                    description: 'must be int',
+                },
+                ISBN: {
+                    bsonType: 'string',
+                    description: 'must be string',
+                },
+                cover_type: {
+                    bsonType: 'string',
+                    description: 'must be string',
+                }
+
+            }
+        }
+    }
+});
