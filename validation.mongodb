@@ -176,3 +176,115 @@ db.createCollection('books', {
         }
     }
 });
+
+db.products.insertMany([
+    {
+        name: 'Samsung 14X UOI_3293',
+        category: 'phones',
+        price: 780.54
+    },
+    {
+        name: 'Xiaomi Re-me S3',
+        category: 'phones',
+        price: 500.65
+    },
+    {
+        name: 'Realm-e x7',
+        category: 'phones',
+        price: 590.434
+    },
+    {
+        name: 'Iphone 12x',
+        category: 'phones',
+        price: 1280.32432
+    }]);
+
+db.getCollectionInfos({name: 'products'});
+
+db.books.insertMany([
+    {
+        name: 'The Whispering Shadows',
+        author: {
+            name: 'Emily',
+            lastName: 'Johnson'
+        }
+    },
+    {
+        name: 'Echoes of Destiny',
+        author: {
+            name: 'Michael',
+            lastName: 'Thompson'
+        }
+    },
+    {
+        name: 'The Enigma Code',
+        author: {
+            name: 'Sophia',
+            lastName: 'Rodriguez'
+        }
+    },
+    {
+        name: 'Beyond the Horizon',
+        author: {
+            name: 'David',
+            lastName: 'Wilson'
+        }
+    }]);
+
+db.books.insertMany([
+    {
+        name: 'To Kill a Mockingbird',
+        author: {
+            name: 'Harper',
+            lastName: 'Lee',
+            birthday: new Date('1926-04-28')
+        },
+        edition: 1,
+        ISBN: '9780061120084',
+        cover_type: 'Paperback'
+    },
+    {
+        name: '1984',
+        author: {
+            name: 'George',
+            lastName: 'Orwell',
+            birthday: new Date('1903-06-25')
+        },
+        edition: 3,
+        ISBN: '9780451524935',
+        cover_type: 'Hardcover'
+    },
+    {
+        name: 'The Great Gatsby',
+        author: {
+            name: 'F. Scott',
+            lastName: 'Fitzgerald',
+            birthday: new Date('1896-09-24')
+        },
+        edition: 2,
+        ISBN: '9780743273565',
+        cover_type: 'Paperback'
+    },
+    {
+        name: 'Pride and Prejudice',
+        author: {
+            name: 'Jane',
+            lastName: 'Austen',
+            birthday: new Date('1775-12-16')
+        },
+        edition: 1,
+        ISBN: '9780141439518',
+        cover_type: 'Paperback'
+    },
+    {
+        name: 'To the Lighthouse',
+        author: {
+            name: 'Virginia',
+            lastName: 'Woolf',
+            birthday: new Date('1882-01-25')
+        },
+        edition: 1,
+        ISBN: '9780156907392',
+        cover_type: 'Paperback'
+    }
+]);
