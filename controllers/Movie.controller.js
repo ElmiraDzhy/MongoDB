@@ -11,40 +11,60 @@ module.exports.createOne = async (req, res, next) => {
 }
 
 module.exports.getAll = async (req, res, next) => {
-    try{
-        const movies  = await Movie.find();
+    try {
+        const movies = await Movie.find();
         res.status(200).send({data: movies});
-    }catch(err){
+    } catch (err) {
         next(err);
     }
 }
 
 module.exports.getOne = async (req, res, next) => {
-    try{
+    try {
         const {params: {id}} = req;
-        const movieInstance  = await Movie.findById(id);
+        const movieInstance = await Movie.findById(id);
         res.status(200).send({data: movieInstance});
-    }catch(err){
+    } catch (err) {
         next(err);
     }
 }
 
 module.exports.update = async (req, res, next) => {
-    try{
+    try {
         const {params: {id}, body} = req;
-        const updatedMovieInstance  = await Movie.findByIdAndUpdate(id, body, {new: true});
+        const updatedMovieInstance = await Movie.findByIdAndUpdate(id, body, {new: true});
         res.status(200).send({data: updatedMovieInstance});
-    }catch(err){
+    } catch (err) {
         next(err);
     }
 }
 
 module.exports.delete = async (req, res, next) => {
-    try{
+    try {
         const {params: {id}} = req;
-        const removedMovieInstance  = await Movie.findByIdAndRemove(id);
+        const removedMovieInstance = await Movie.findByIdAndRemove(id);
         res.status(200).send({data: removedMovieInstance});
-    }catch(err){
+    } catch (err) {
+        next(err);
+    }
+}
+
+module.exports.getSearchOne = async (req, res, next) => {
+    try {
+        const {query} = req;
+        const movieInstance = await Movie.findOne({...query});
+        res.status(200).send({data: movieInstance});
+    } catch (err) {
+        next(err);
+    }
+}
+
+module.exports.getSearchAll = async (req, res, next) => {
+    try {
+        const {query} = req;
+        const movieInstance = await Movie.find({...query});
+        res.status(200).send({data: movieInstance});
+    } catch (err) {
         next(err);
     }
 }
