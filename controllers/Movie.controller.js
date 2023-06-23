@@ -18,6 +18,7 @@ module.exports.getAll = async (req, res, next) => {
         next(err);
     }
 }
+
 module.exports.getOne = async (req, res, next) => {
     try{
         const {params: {id}} = req;
@@ -27,15 +28,17 @@ module.exports.getOne = async (req, res, next) => {
         next(err);
     }
 }
+
 module.exports.update = async (req, res, next) => {
     try{
         const {params: {id}, body} = req;
-        const updatedMovieInstance  = await Movie.findByIdAndUpdate(id, body);
+        const updatedMovieInstance  = await Movie.findByIdAndUpdate(id, body, {new: true});
         res.status(200).send({data: updatedMovieInstance});
     }catch(err){
         next(err);
     }
 }
+
 module.exports.delete = async (req, res, next) => {
     try{
         const {params: {id}} = req;
