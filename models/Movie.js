@@ -18,3 +18,7 @@ const movieSchema = new Schema({
     actors: [String],
     rating: Number,
 });
+
+const Movie = mongoose.model('Movie', movieSchema);
+
+module.exports = Movie;
