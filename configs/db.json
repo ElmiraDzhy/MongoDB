@@ -1,0 +1,11 @@
+{
+  "development": {
+    "database": "movie-db",
+    "port": 27017,
+    "host": "localhost"
+  },
+  "test": {
+  },
+  "production": {
+  }
+}
