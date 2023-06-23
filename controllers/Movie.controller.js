@@ -11,7 +11,6 @@ module.exports.createOne = async (req, res, next) => {
 }
 
 module.exports.getAll = async (req, res, next) => {
-    console.log('here')
     try{
         const movies  = await Movie.find();
         res.status(200).send(movies);
@@ -19,7 +18,15 @@ module.exports.getAll = async (req, res, next) => {
         next(err);
     }
 }
-// module.exports.createOne = async (req, res, next) => {}
+module.exports.getOne = async (req, res, next) => {
+    try{
+        const {params: {id}} = req;
+        const movieInstance  = await Movie.findById(id);
+        res.status(200).send(movieInstance);
+    }catch(err){
+        next(err);
+    }
+}
 // module.exports.createOne = async (req, res, next) => {}
 // module.exports.createOne = async (req, res, next) => {}
 // module.exports.createOne = async (req, res, next) => {}
