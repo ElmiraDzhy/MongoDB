@@ -105,6 +105,9 @@ db.products.aggregate([{
     $unwind: {
         path: '$manuf'
     }
+},
+    {
+        $unset: 'manufacturerId'
 }]);
 
 
