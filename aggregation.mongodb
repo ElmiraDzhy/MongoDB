@@ -54,6 +54,9 @@ db.createCollection('products', {
                 },
                 expiredDate: {
                     bsonType: 'date',
+                },
+                 manufacturerId: {
+                    bsonType: 'objectId'
                 }
             }
         }
@@ -65,27 +68,32 @@ db.products.insertMany([
         name: 'iPhone',
         price: 200.67,
         amount: 20,
-        expiredDate: new Date()
+        expiredDate: new Date(),
+        manufacturerId: new ObjectId('64992dc997f3ff4ada8f3b99')
     },
     {
         name: 'S10',
         price: 400.57,
         amount: 40,
+        manufacturerId: new ObjectId('64992dc997f3ff4ada8f3b9b')
     },
     {
         name: 'iPad',
         price: 650.67,
         amount: 20,
+        manufacturerId: new ObjectId('64992dc997f3ff4ada8f3b99')
 
     },
     {
         name: '40S',
         price: 500.67,
         amount: 20,
-        expiredDate: new Date()
+        expiredDate: new Date(),
+        manufacturerId: new ObjectId('64992dc997f3ff4ada8f3b9b')
     }
 
 ]);
+
 
 
 db.products.find();
