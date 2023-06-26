@@ -13,17 +13,23 @@ module.exports.create = async (req, res, next) => {
 module.exports.getOne = async (req, res, next) => {
     try {
         const {params: {id}} = req;
-        const foundUser = await User.findById(id);
+        const foundUser = await User.findById(id).populate('favouriteFilms');
         res.status(200).send({data: foundUser});
     } catch (err) {
-        next(err)
+        next(err);
     }
 
 }
 
-// module.exports.create = async(req, res, next) => {
-//
-// }
+module.exports.getAll = async(req, res, next) => {
+    try {
+        const users = await User.find().populate('favouriteFilms');
+        res.status(200).send({data: users});
+    } catch (err) {
+        next(err);
+    }
+}
+
 // module.exports.create = async(req, res, next) => {
 //
 // }
