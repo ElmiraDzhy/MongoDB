@@ -1,0 +1,91 @@
+db.createCollection('manufacturer', {
+    validator: {
+        $jsonSchema: {
+            bsonType: 'object',
+            required: ['name'],
+            properties: {
+                name: {
+                    bsonType: 'string'
+                },
+                address: {
+                    bsonType: 'object',
+                    required: ['country', 'city']
+                }
+            }
+        }
+    }
+});
+
+db.manufacturer.insertMany([
+    {
+        name: 'Apple',
+        address: {
+            country: 'USA',
+            city: 'NY'
+        }
+    },
+    {
+        name: 'Sony',
+        address: {
+            country: 'China',
+            city: 'Pekin'
+        }
+    },
+    {
+        name: 'Samsung',
+
+    }
+]);
+
+db.createCollection('products', {
+    validator: {
+        $jsonSchema: {
+            bsonType: 'object',
+            required: ['name', 'price', 'amount'],
+            properties: {
+                name: {
+                    bsonType: 'string'
+                },
+                price: {
+                    bsonType: 'double',
+                },
+                amount: {
+                    bsonType: 'int',
+                },
+                expiredDate: {
+                    bsonType: 'date',
+                }
+            }
+        }
+    }
+});
+
+db.products.insertMany([
+    {
+        name: 'iPhone',
+        price: 200.67,
+        amount: 20,
+        expiredDate: new Date()
+    },
+    {
+        name: 'S10',
+        price: 400.57,
+        amount: 40,
+    },
+    {
+        name: 'iPad',
+        price: 650.67,
+        amount: 20,
+
+    },
+    {
+        name: '40S',
+        price: 500.67,
+        amount: 20,
+        expiredDate: new Date()
+    }
+
+]);
+
+
+db.products.find();
