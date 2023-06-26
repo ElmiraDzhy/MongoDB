@@ -94,6 +94,15 @@ db.products.insertMany([
 
 ]);
 
+db.products.aggregate([{
+    $lookup: {
+        from: 'manufacturer',
+        localField: 'manufacturerId',
+        foreignField: '_id',
+        as: 'manuf'
+    }
+}]);
+
 
 
 db.products.find();
