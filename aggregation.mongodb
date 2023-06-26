@@ -144,4 +144,165 @@ db.products.aggregate([{
 
 
 
+// practice tasks
+db.createCollection('students', {
+    validator: {
+        $jsonSchema: {
+            bsonType: 'object',
+            required: ['name', 'surname', 'email', 'group'],
+            properties: {
+                name: {
+                    bsonType: 'string'
+                },
+                surname: {
+                    bsonType: 'string'
+                },
+                email: {
+                    bsonType: 'string'
+                },
+                group: {
+                    bsonType: 'objectId'
+                }
+            }
+        }
+    }
+});
+
+db.createCollection('groups', {
+    validator: {
+        $jsonSchema: {
+            bsonType: 'object',
+            required: ['name'],
+            properties: {
+                name: {
+                    bsonType: 'string'
+                },
+                mentor: {
+                    bsonType: 'object',
+                    required: ['name', 'surname'],
+                    properties: {
+                        name: {
+                            bsonType: 'string'
+                        },
+                        surname: {
+                            bsonType: 'string'
+                        }
+                    }
+                }
+            }
+        }
+    }
+});
+
+
+
+db.groups.insertMany([
+    {
+        name: "Group A",
+        mentor: {
+            name: "John",
+            surname: "Doe"
+        }
+    },
+    {
+        name: "Group B",
+        mentor: {
+            name: "Jane",
+            surname: "Smith"
+        }
+    },
+    {
+        name: "Group C",
+        mentor: {
+            name: "David",
+            surname: "Johnson"
+        }
+    }
+]);
+db.students.insertMany([
+    {
+        name: "Alice",
+        surname: "Johnson",
+        email: "alice.johnson@example.com",
+        group: new ObjectId("649940b597f3ff4ada8f3bb5")
+    },
+    {
+        name: "Bob",
+        surname: "Smith",
+        email: "bob.smith@example.com",
+        group: new ObjectId("649940b597f3ff4ada8f3bb5")
+    },
+    {
+        name: "Emily",
+        surname: "Davis",
+        email: "emily.davis@example.com",
+        group:  new ObjectId("649940b597f3ff4ada8f3bb5")
+    },
+]);
+
+db.students.insertMany([
+    {
+        name: "Sophia",
+        surname: "Miller",
+        email: "sophia.miller@example.com",
+        group: ObjectId("649940b597f3ff4ada8f3bb6")
+    },
+    {
+        name: "Oliver",
+        surname: "Wilson",
+        email: "oliver.wilson@example.com",
+        group: ObjectId("649940b597f3ff4ada8f3bb6")
+    },
+    {
+        name: "Ava",
+        surname: "Taylor",
+        email: "ava.taylor@example.com",
+        group: ObjectId("649940b597f3ff4ada8f3bb6")
+    },
+    {
+        name: "Liam",
+        surname: "Anderson",
+        email: "liam.anderson@example.com",
+        group: ObjectId("649940b597f3ff4ada8f3bb6")
+    },
+    {
+        name: "Isabella",
+        surname: "Clark",
+        email: "isabella.clark@example.com",
+        group: ObjectId("649940b597f3ff4ada8f3bb7")
+    },
+    {
+        name: "Mia",
+        surname: "Adams",
+        email: "mia.adams@example.com",
+        group: ObjectId("649940b597f3ff4ada8f3bb7")
+    }
+]);
+
+db.students.aggregate([{
+    $lookup: {
+        from: 'groups',
+        localField: 'group',
+        foreignField: '_id',
+        as: 'studgroup'
+    }
+}, {
+    $unwind: {
+        path: '$studgroup'
+    }
+},
+    {
+        $unset: 'group'
+    },
+    {
+        $group: {
+            _id: '$studgroup.name',
+            countPositions: {
+                $count: {}
+            }
+        }
+    }]);
+
+
+
 db.products.find();
