@@ -1,4 +1,4 @@
-const {Movie} = require('../models');
+const {Movie, User} = require('../models');
 
 module.exports.createOne = async (req, res, next) => {
     try {
@@ -64,6 +64,21 @@ module.exports.getSearchAll = async (req, res, next) => {
         const {query} = req;
         const movieInstance = await Movie.find({...query});
         res.status(200).send({data: movieInstance});
+    } catch (err) {
+        next(err);
+    }
+}
+module.exports.getUsersLikedFilm = async (req, res, next) => {
+    try {
+        const {params: {id}} = req;
+        const movie = await Movie.aggregate().lookup({
+            from: 'users',
+            localField: '_id',
+            foreignField: 'favouriteFilms',
+            as: 'fans'
+        });
+
+        res.status(200).send({data: movie});
     } catch (err) {
         next(err);
     }

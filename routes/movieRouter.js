@@ -9,5 +9,6 @@ movieRouter.patch('/:id', MovieController.update);
 movieRouter.delete('/:id', MovieController.delete);
 movieRouter.get('/search', MovieController.getSearchOne);
 movieRouter.get('/search/all', MovieController.getSearchAll);
+movieRouter.get('/fans/:id', MovieController.getUsersLikedFilm);
 
 module.exports = movieRouter;
