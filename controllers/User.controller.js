@@ -1,4 +1,4 @@
-const {User} = require('../models');
+const {User, Movie} = require('../models');
 
 module.exports.create = async (req, res, next) => {
     try {
@@ -21,7 +21,7 @@ module.exports.getOne = async (req, res, next) => {
 
 }
 
-module.exports.getAll = async(req, res, next) => {
+module.exports.getAll = async (req, res, next) => {
     try {
         const users = await User.find().populate('favouriteFilms');
         res.status(200).send({data: users});
@@ -30,9 +30,22 @@ module.exports.getAll = async(req, res, next) => {
     }
 }
 
-// module.exports.create = async(req, res, next) => {
-//
-// }
+module.exports.addFilmToFav = async (req, res, next) => {
+    try {
+        const {params: {movieId, userId}} = req;
+        const userInstance = await User.updateOne({
+            id: userId
+        }, {
+            $addToSet: {
+                favouriteFilms: movieId
+            }
+        });
+        res.status(200).send({data: userInstance});
+
+    } catch (err) {
+        next(err);
+    }
+}
 // module.exports.create = async(req, res, next) => {
 //
 // }

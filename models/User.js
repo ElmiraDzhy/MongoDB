@@ -22,6 +22,8 @@ const userSchema = new Schema({
 
 });
 
+userSchema.index({favouriteFilms: 1}, {unique: true});
+
 const User = mongoose.model('User', userSchema);
 
 module.exports = User;
