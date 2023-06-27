@@ -32,6 +32,8 @@ const rentSchema = new Schema({
 
 });
 
+rentSchema.index({movie: 1, user: 1}, {unique: true});
+
 const Rent = mongoose.model('Rent', rentSchema);
 
 module.exports = Rent;
